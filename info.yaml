@@ -1,55 +1,55 @@
 # Tiny Tapeout project information
 project:
-  title:        ""      # Project title
-  author:       ""      # Your name
+  title:        "dt-asic"      # Project title
+  author:       "Nicolas STAS & Yiming Guo"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  ""      # One line description of what your project does
-  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  description:  "a decision tree classifier for 5x5 binary digits"      # One line description of what your project does
+  language:     "Amaranth" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     1000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_example"
+  top_module:  "tt_um_COLVERTYETY_top"
 
   # List your project's source files here.
   # Source files must be in ./src and you must list each source file separately, one per line.
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
-    - "project.v"
+    - "tree.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  ui[0]: "row_addr[0]"
+  ui[1]: "row_addr[1]"
+  ui[2]: "row_addr[2]"
+  ui[3]: "row_data[0]"
+  ui[4]: "row_data[1]"
+  ui[5]: "row_data[2]"
+  ui[6]: "row_data[3]"
+  ui[7]: "row_data[4]"
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "predicted_class"
+  uo[1]: "predicted_class"
+  uo[2]: "predicted_class"
+  uo[3]: "predicted_class"
+  uo[4]: "predicted_class"
+  uo[5]: "predicted_class"
+  uo[6]: "predicted_class"
+  uo[7]: "predicted_class"
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
+  uio[0]: "not_used"
+  uio[1]: "not_used"
+  uio[2]: "not_used"
+  uio[3]: "not_used"
+  uio[4]: "not_used"
+  uio[5]: "not_used"
+  uio[6]: "not_used"
+  uio[7]: "not_used"
 
 # Do not change!
 yaml_version: 6
