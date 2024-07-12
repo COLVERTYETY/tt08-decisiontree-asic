@@ -31,9 +31,9 @@ The output of the device is the predicted digit.
 
 ## How to test
 
-Explain how to use your project
+The ironic part is that to test this project you most likely need an external mcu which would run the model much faster than the asic...
+You can also use a parallel to serial converter to send the data to the device.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
-
+The minimum required external hardware is a switch matrix to shape the digits and a parallel to serial converter to send the data to the device. 
