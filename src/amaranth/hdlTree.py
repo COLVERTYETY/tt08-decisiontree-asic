@@ -194,6 +194,10 @@ def generate_verilog(root:node, filename="tree.v"):
         ClockSignal("sync").eq(clk),
         ResetSignal("sync").eq(~rst_n),
     ]
+    m.d.comb += [
+        uio_out.eq(0xff),
+        uio_oe.eq(0xff),
+    ]
     # create the IO block and the tree
     io = IO_Block(m, ui_in, s_image)
     io.activate()
