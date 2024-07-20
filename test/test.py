@@ -47,7 +47,7 @@ async def test_project(dut):
     """Test the project."""
 
     dataset = get_dataset()
-    print(dataset)
+    # print(dataset)
 
 
     # Initialize the dut
@@ -70,17 +70,18 @@ async def test_project(dut):
     correct = 0
     for i, (l,v) in enumerate(dataset):
         test = shape_input(v)
-        dut.ena.value = 1
-        dut.ui_in.value = 0
-        dut.uio_in.value = 0
-        dut.rst_n.value = 0
-        await ClockCycles(dut.clk, 10)
-        dut.rst_n.value = 1
+        # dut.ena.value = 1
+        # dut.ui_in.value = 0
+        # dut.uio_in.value = 0
+        # dut.rst_n.value = 0
+        # await ClockCycles(dut.clk, 10)
+        # dut.rst_n.value = 1
         dut._log.info(f"Test {i} with label {l} and values {v}")
         for j, x in test:
             dut.ui_in.value = j*2**3 + x
             await ClockCycles(dut.clk, 1)
         correct += 1 if dut.uo_out.value == l else 0
+        dut._log.info(f"Output: {dut.uo_out.value} Expected: {l}")
     dut._log.info(f"Correct: {correct}/{len(dataset)}")
     assert correct >= len(dataset)*0.9
 
