@@ -47,7 +47,8 @@ async def test_project(dut):
     """Test the project."""
 
     dataset = get_dataset()
-    print(dataset)
+    fails = []
+    # print(dataset)
 
 
     # Initialize the dut
@@ -67,17 +68,31 @@ async def test_project(dut):
     dut.rst_n.value = 1
 
     dut._log.info("Test project behavior")
-
-    # Set the input values you want to test
-    dut.ui_in.value = 20
-    dut.uio_in.value = 30
+    correct = 0
+    for i, (l,v) in enumerate(dataset):
+        test = shape_input(v)
+        dut._log.info(f"Test {i} with label {l} and values {v}")
+        dut._log.info("Reset")
+        dut.ena.value = 1
+        dut.ui_in.value = 0
+        dut.uio_in.value = 0
+        dut.rst_n.value = 0
+        await ClockCycles(dut.clk, 3)
+        dut.rst_n.value = 1
+        await ClockCycles(dut.clk, 3)
+        for x, j in test:
+            dut.ui_in.value = j*2**3 + x
+            await ClockCycles(dut.clk, 1)
+        correct += 1 if int(dut.uo_out.value) == l else 0
+        # dut._log.info(f"Output: {int(dut.uo_out.value)} Expected: {l}")
+        if int(dut.uo_out.value) != l:
+            dut._log.error(f"Output: {int(dut.uo_out.value)} Expected: {l} at {i}")
+            fails.append(i)
+    dut._log.info(f"Correct: {correct}/{len(dataset)}")
+    assert correct >= len(dataset)*0.6, "too many errors"
 
     # Wait for one clock cycle to see the output values
     await ClockCycles(dut.clk, 1)
-
-    # The following assersion is just an example of how to check the output values.
-    # Change it to match the actual expected output of your module:
-    # assert dut.uo_out.value == 50
-
-    # Keep testing the module by changing the input values, waiting for
-    # one or more clock cycles, and asserting the expected output values.
+    dut._log.info("End")
+    # save the fails
+    print(fails)
