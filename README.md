@@ -1,6 +1,8 @@
 ![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg) ![](../../workflows/fpga/badge.svg)
 
-![logo](docs/logo.jpeg)
+
+<img src="docs/logo.jpeg" alt="drawing" width="200"/>
+
 # tt08-decisiontree-asic
 This project explores the generation of custom ml hardware from ml software.
 
