@@ -83,6 +83,7 @@ async def test_project(dut):
         for x, j in test:
             dut.ui_in.value = j*2**3 + x
             await ClockCycles(dut.clk, 1)
+        await ClockCycles(dut.clk, 5)
         correct += 1 if int(dut.uo_out.value) == l else 0
         # dut._log.info(f"Output: {int(dut.uo_out.value)} Expected: {l}")
         if int(dut.uo_out.value) != l:
